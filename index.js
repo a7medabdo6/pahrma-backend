@@ -1,6 +1,6 @@
 const  express = require("express")
 const compression = require('compression')
-
+var cors = require('cors')
 require('express-async-errors');
 const mongoose = require('mongoose');
 
@@ -23,7 +23,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/pharma')
 
 
   app.use(express.json())
-
+app.use(cors())
   app.use(helmet());
   app.use(compression())
 app.use(morgan('tiny'));
