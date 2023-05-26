@@ -19,7 +19,7 @@ router.post("/", async(req,res)=>{
 
 let email = await user.findOne({mail:req.body.mail})  // البحث عن الاايميل اذا كان مسجل ن قبل ام لا
 if(email){
-    return  res.status(404).send("email is used")
+    return  res.status("email is used").send("email is used")
   }
     const User = new user(_.pick(req.body,["FullName","mail","password","isAdmin"]))  // هنا يتم اخذ نسخه من ايوزر ليتم عمل عليه نسخه اخرى 
  
