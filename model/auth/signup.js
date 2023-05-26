@@ -25,6 +25,24 @@ const userSchema = new mongoose.Schema({
         maxlength:1024
         
     },
+    phone : {
+        type:Number,
+        required:true,
+        minlength:11,
+        maxlength:11
+    },
+    age : {
+        type:Number,
+        required:true,
+        minlength:1,
+        maxlength:3
+    },
+    gender : {
+        type:String,
+        required:true,
+        minlength:3,
+        maxlength:44
+    },
     isAdmin :  Boolean
 })
 //// هذه الداله لصناعه التوكين
@@ -41,6 +59,10 @@ function validateUser(user) {
         FullName :  joi.string().min(3).max(44).required(),
         mail : joi.string().min(3).max(255).required().email(),
         password :  joi.string().min(8).max(255).required(),
+        age :  joi.number().required(),
+        phone :  joi.number().required(),
+        gender :  joi.string().required(),
+
         isAdmin : joi.boolean()
 
     })

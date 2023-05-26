@@ -21,7 +21,7 @@ let email = await user.findOne({mail:req.body.mail})  // البحث عن الا�
 if(email){
     return  res.status(404).send("email is used")
   }
-    const User = new user(_.pick(req.body,["FullName","mail","password","isAdmin"]))  // هنا يتم اخذ نسخه من ايوزر ليتم عمل عليه نسخه اخرى 
+    const User = new user(_.pick(req.body,["FullName","mail","password","isAdmin","age","gender","phone"]))  // هنا يتم اخذ نسخه من ايوزر ليتم عمل عليه نسخه اخرى 
  
   
         const {error} =validateUser(req.body)  // هنا التحقق من وجود اخطاء في المخلات اذا وجددت لا يتم لارسال من الاساس
