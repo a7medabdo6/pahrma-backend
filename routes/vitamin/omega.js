@@ -6,9 +6,13 @@ const mongoose = require('mongoose');
 const {validateUser,omega} = require("../../model/vitamin/omega")
 const auth = require("../../middleware/auth") // للحمايه من اى حد يضيف
 const admin = require("../../middleware/admin") // للحمايه من اى حد يضيف
+const multer = require('multer');
+const path = require('path');
 
 router.get("/",async (req,res)=>{
     const getomega = await  omega.find().sort("name")
+    // res.send(path.join(__dirname, '/uploads/' + req.file));
+
     res.send(getomega)
     })
 
@@ -45,12 +49,22 @@ res.send(findomega)
 })
 
     
+// Set storage destination for uploaded files
+const storage = multer.diskStorage({
+  destination: './uploads/',
+  filename: function(req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
 
+// Initialize multer
+const upload = multer({ storage: storage });
 
-    router.post("/",auth, async(req,res)=>{
+    router.post("/", upload.single('photo'), async(req,res)=>{
    const omegaone = new omega({
     FullName : req.body.FullName,
-    price : req.body.price
+    price : req.body.price,
+    photo:req.file.filename
    })
  
  
@@ -60,7 +74,12 @@ res.send(findomega)
           return  res.send(error.details[0].message)
         }else{
            await omegaone.save()
-            res.send(omegaone)
+          //  console.log(req.file,"77777");
+           const response = {
+            // photo: req.file.filename,
+            data:omegaone
+          };
+            res.send(response)
         }
         //   console.log(result);
        

@@ -20,6 +20,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/pharma')
   const signup = require("./routes/auth/signup")
   const omega = require("./routes/vitamin/omega")
   const profile = require("./routes/user/profile")
+  const cart = require("./routes/cart/cart")
+  const part = require("./routes/part/part")
+  const Product = require("./routes/ProductRoute/ProductRoute")
+  const Categories = require("./routes/CategoriesRoute/CategoriesRoute")
 
 
   app.use(express.json())
@@ -30,8 +34,13 @@ app.use(morgan('tiny'));
 app.use("/api/user/signin",signin);
 app.use("/api/user/signup",signup);
 app.use("/api/user",profile);
+app.use("/api/cart",cart);
+app.use("/api/part",part);
+app.use("/api/product",Product);
+app.use("/api/Categories",Categories);
 
 app.use("/api/omega",omega);
+app.use('/api/uploads', express.static('uploads'));
 
 
 

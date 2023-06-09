@@ -16,6 +16,10 @@ const omega = mongoose.model("omega",new mongoose.Schema({
         required:true,
         
     },
+    photo:{
+   type:String,
+
+    }
 }))
 
 
